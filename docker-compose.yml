@@ -1,0 +1,49 @@
+version: "3.4"
+
+services:
+    sisponto:
+        container_name: sisponto-laravel
+        build:
+            context: ./
+            dockerfile: ./Dockerfile
+#            target: dev
+        volumes:
+            - ./:/var/www/
+        ports:
+            - "8000:8000"
+#        entrypoint: ./docker/dev/entrypoint.sh
+        networks:
+            - app-network
+
+    sisponto-db:
+        image: mysql:5.7
+        container_name: sisponto-db
+        hostname: sisponto-db
+        restart: always
+        environment:
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_USER=root
+            - MYSQL_PASSWORD=root
+            - MYSQL_DATABASE=sisponto
+        ports:
+            - "3306:3306"
+        volumes:
+            - db_data:/var/lib/mysql
+        networks:
+            - app-network
+
+    phpmyadmin:
+        image: phpmyadmin:latest
+        ports:
+            - 9001:80
+        networks:
+            - app-network
+        environment:
+            - PMA_ARBITRARY=1
+
+networks:
+    app-network:
+volumes:
+    db_data:
+#    sisponto-db:
+#        driver: local
