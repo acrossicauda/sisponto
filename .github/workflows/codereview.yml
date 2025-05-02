@@ -1,14 +1,13 @@
 name: Code Review
 
 on:
-  pull_request:
+  push:
     branches:
       - 'main'
     types: [closed]
 
 jobs:
   review:
-    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
