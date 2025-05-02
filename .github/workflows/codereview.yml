@@ -4,10 +4,11 @@ on:
   pull_request:
     branches:
       - 'main'
-    types: [opened, synchronize, reopened]
+    types: [closed]
 
 jobs:
   review:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -16,9 +17,9 @@ jobs:
       - name: Run Review Code by IA
         uses: cirolini/genai-code-review@v2
         with:
-          github-token: ${{ secrets.TOKEN_GITHUB }}
+          #github-token: ${{ secrets.TOKEN_GITHUB }}
           openai-api-key: ${{ secrets.OPENAI_API_KEY }}
-          github_pr_id: ${{ github.event.number }}
+          #github_pr_id: ${{ github.event.number }}
           openai_model: "gpt-3.5-turbo" # optional
           openai_temperature: 0.5 # optional
           openai_max_tokens: 2048 # optional
