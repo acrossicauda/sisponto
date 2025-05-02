@@ -26,45 +26,49 @@ jobs:
 
       - name: Instalar dependências do Node.js
         run: npm install
-        working-directory: ./EstudarIngles
+        working-directory: ./sisponto
 
       - name: Instalar dependências do Composer
         run: composer install
-        working-directory: ./EstudarIngles
+        working-directory: ./sisponto
 
 
       - name: Copiar e ajustar o arquivo .env
         run: cp .env.ci .env
-        working-directory: ./EstudarIngles
+        working-directory: ./sisponto
 
 
       - name: Trocar valor DB_HOST
         run: sed -i "s/DB_HOST={DB_HOST}/DB_HOST=${{ secrets.DB_HOST }}/g" .env
-        working-directory: ./EstudarIngles
+        working-directory: ./sisponto
 
       - name: Trocar valor DB_DATABASE_PRD
         run: sed -i "s/DB_DATABASE={DB_DATABASE}/DB_DATABASE=${{ secrets.DB_DATABASE_PRD }}/g" .env
-        working-directory: ./EstudarIngles
+        working-directory: ./sisponto
 
       - name: Trocar valor DB_USERNAME
         run: sed -i "s/DB_USERNAME={DB_USERNAME}/DB_USERNAME=${{ secrets.DB_USERNAME }}/g" .env
-        working-directory: ./EstudarIngles
+        working-directory: ./sisponto
 
       - name: Trocar valor DB_PASSWORD
         run: sed -i "s/DB_PASSWORD={DB_PASSWORD}/DB_PASSWORD=${{ secrets.DB_PASSWORD }}/g" .env
-        working-directory: ./EstudarIngles
+        working-directory: ./sisponto
+
+      - name: Trocar valor DEFAULT_PASSWORD primeiro acesso
+        run: sed -i "s/DB_PASSWORD={DB_PASSWORD}/DB_PASSWORD=${{ secrets.DEFAULT_PASSWORD }}/g" .env
+        working-directory: ./sisponto
 
       - name: Trocar valor APP_DEBUG
         run: sed -i "s/APP_DEBUG={APP_DEBUG}/APP_DEBUG=false/g" .env
-        working-directory: ./EstudarIngles
+        working-directory: ./sisponto
 
       - name: Trocar valor APP_NAME
         run: sed -i "s/APP_NAME={APP_NAME}/APP_NAME=\"Chat...\"/g" .env
-        working-directory: ./EstudarIngles
+        working-directory: ./sisponto
 
       - name: Gerando KEY do LARAVEL
         run: php artisan key:generate
-        working-directory: ./EstudarIngles
+        working-directory: ./sisponto
 
 
       - name: Rodando migrations
@@ -75,58 +79,58 @@ jobs:
           DB_PORT: 3306
           DB_USER: ${{ secrets.DB_USERNAME }}
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-        run: php artisan migrate
-        working-directory: ./EstudarIngles
+        run: php artisan migrate --seed
+        working-directory: ./sisponto
 
       - name: Rodando Storage Link
         run: php artisan storage:link
-        working-directory: ./EstudarIngles
+        working-directory: ./sisponto
 
       #    - name: NPM RUN
       #      run: npm run prod
-      #      working-directory: ./EstudarIngles
+      #      working-directory: ./sisponto
 
       - name: Building application
         run: npm run build
-        working-directory: ./EstudarIngles
+        working-directory: ./sisponto
 
       #    - name: Execute PHPUnit tests
       #      run: ./vendor/bin/phpunit
-      #      working-directory: ./EstudarIngles
+      #      working-directory: ./sisponto
 
       # CONFIGURACAO EMAIL
       #    - name: Trocar valor MAIL_MAILER
       #      run: sed -i "s/MAIL_MAILER={MAIL_MAILER}/MAIL_MAILER=${{ secrets.MAIL_MAILER_PRD }}/g" .env
-      #      working-directory: ./EstudarIngles
+      #      working-directory: ./sisponto
 
       #    - name: Trocar valor MAIL_HOST
       #      run: sed -i "s/MAIL_HOST={MAIL_HOST}/MAIL_HOST=${{ secrets.MAIL_HOST_PRD }}/g" .env
-      #      working-directory: ./EstudarIngles
+      #      working-directory: ./sisponto
 
       #    - name: Trocar valor MAIL_PORT
       #      run: sed -i "s/MAIL_PORT={MAIL_PORT}/MAIL_PORT=${{ secrets.MAIL_PORT_PRD }}/g" .env
-      #      working-directory: ./EstudarIngles
+      #      working-directory: ./sisponto
 
       #    - name: Trocar valor MAIL_USERNAME
       #      run: sed -i "s/MAIL_USERNAME={MAIL_USERNAME}/MAIL_USERNAME=${{ secrets.MAIL_USERNAME_PRD }}/g" .env
-      #      working-directory: ./EstudarIngles
+      #      working-directory: ./sisponto
 
       #    - name: Trocar valor MAIL_PASSWORD
       #      run: sed -i "s/MAIL_PASSWORD={MAIL_PASSWORD}/MAIL_PASSWORD=${{ secrets.MAIL_PASSWORD_PRD }}/g" .env
-      #      working-directory: ./EstudarIngles
+      #      working-directory: ./sisponto
 
       #    - name: Trocar valor MAIL_ENCRYPTION
       #      run: sed -i "s/MAIL_ENCRYPTION={MAIL_ENCRYPTION}/MAIL_ENCRYPTION=${{ secrets.MAIL_ENCRYPTION_PRD }}/g" .env
-      #      working-directory: ./EstudarIngles
+      #      working-directory: ./sisponto
 
 
-      - name: Trocar valor API_IA_URL
-        run: sed -i "s|{API_IA_URL}|\"${{ secrets.API_IA_URL }}\"|g" .env
-        working-directory: ./EstudarIngles
+#      - name: Trocar valor API_IA_URL
+#        run: sed -i "s|{API_IA_URL}|\"${{ secrets.API_IA_URL }}\"|g" .env
+#        working-directory: ./sisponto
 
       #    - name: Trocar valor MAIL_ENCRYPTION
       #      run: sed -i "s/API_IA_TOKEN={API_IA_TOKEN}/API_IA_TOKEN=${{ secrets.API_IA_TOKEN }}/g" .env
-      #      working-directory: ./EstudarIngles
+      #      working-directory: ./sisponto
 
       - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
