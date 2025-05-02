@@ -13,7 +13,14 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Run Review Code by IA
-        uses: DanielZlotin/review-gpt@v3
+        uses: cirolini/genai-code-review@v2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           openai-api-key: ${{ secrets.OPENAI_API_KEY }}
+          github_pr_id: ${{ github.event.number }}
+          openai_model: "gpt-3.5-turbo" # optional
+          openai_temperature: 0.5 # optional
+          openai_max_tokens: 2048 # optional
+          mode: files # files or patch
+          language: pt-br # optional, default is 'en'
+          custom_prompt: "" # optional
