@@ -31,6 +31,10 @@ jobs:
 #        working-directory: .
 
 
+      - name: Verificar conteúdo da pasta sisponto
+        run: ls -la ./
+
+
       - name: Copiar e ajustar o arquivo .env
         run: cp .env.ci .env
         working-directory: .
