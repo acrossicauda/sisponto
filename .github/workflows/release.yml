@@ -30,21 +30,6 @@ jobs:
 #        run: npm install
 #        working-directory: .
 
-      - name: Atualizar dependências do Composer (TEMPORÁRIO)
-        run: composer update
-        working-directory: .
-
-
-      - name: Instalar dependências do Composer
-        run: composer install
-        working-directory: .
-
-
-      - name: Copiar e ajustar o arquivo .env
-        run: cp .env.ci .env
-        working-directory: .
-
-
       - name: Trocar valor DB_HOST
         run: sed -i "s/DB_HOST={DB_HOST}/DB_HOST=${{ secrets.DB_HOST }}/g" .env
         working-directory: .
@@ -72,6 +57,17 @@ jobs:
       - name: Trocar valor APP_NAME
         run: sed -i "s/APP_NAME={APP_NAME}/APP_NAME=\"Chat...\"/g" .env
         working-directory: .
+
+
+      - name: Atualizar dependências do Composer (TEMPORÁRIO)
+        run: composer update
+        working-directory: .
+
+
+      - name: Instalar dependências do Composer
+        run: composer install
+        working-directory: .
+
 
       - name: Gerando KEY do LARAVEL
         run: php artisan key:generate
