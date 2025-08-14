@@ -30,6 +30,11 @@ jobs:
 #        run: npm install
 #        working-directory: .
 
+
+      - name: Copiar e ajustar o arquivo .env
+        run: cp .env.ci .env
+        working-directory: .
+
       - name: Trocar valor DB_HOST
         run: sed -i "s/DB_HOST={DB_HOST}/DB_HOST=${{ secrets.DB_HOST }}/g" .env
         working-directory: .
