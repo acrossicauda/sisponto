@@ -24,9 +24,9 @@ jobs:
         env:
           debug: true # specify true or false
 
-      - name: Instalar dependências do Node.js
-        run: npm install
-        working-directory: ./sisponto
+#      - name: Instalar dependências do Node.js
+#        run: npm install
+#        working-directory: ./sisponto
 
       - name: Instalar dependências do Composer
         run: composer install
