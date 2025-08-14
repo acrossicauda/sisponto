@@ -17,7 +17,7 @@ jobs:
       - name: Configurar ambiente PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.2
+          php-version: 8.1
           #        php-version: ${{ matrix.php-versions }}
           extensions: mbstring, intl
           ini-values: post_max_size=256M, max_execution_time=180
@@ -33,49 +33,49 @@ jobs:
       - name: Verificar conteúdo da pasta sisponto
         run: ls -la ./
 
-      - name: Criar arquivo .env dinamicamente
-        run: |
-          cat <<EOF > .env
-          APP_NAME="Chat..."
-          APP_DEBUG=false
-          DB_HOST=${{ secrets.DB_HOST }}
-          DB_DATABASE=${{ secrets.DB_DATABASE_PRD }}
-          DB_USERNAME=${{ secrets.DB_USERNAME }}
-          DB_PASSWORD=${{ secrets.DB_PASSWORD }}
-          DEFAULT_PASSWORD=${{ secrets.DEFAULT_PASSWORD }}
-          EOF
-        working-directory: .
-
-#      - name: Copiar e ajustar o arquivo .env
-#        run: cp .env.ci .env
+#      - name: Criar arquivo .env dinamicamente
+#        run: |
+#          cat <<EOF > .env
+#          APP_NAME="Chat..."
+#          APP_DEBUG=false
+#          DB_HOST=${{ secrets.DB_HOST }}
+#          DB_DATABASE=${{ secrets.DB_DATABASE_PRD }}
+#          DB_USERNAME=${{ secrets.DB_USERNAME }}
+#          DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+#          DEFAULT_PASSWORD=${{ secrets.DEFAULT_PASSWORD }}
+#          EOF
 #        working-directory: .
 
+      - name: Copiar e ajustar o arquivo .env
+        run: cp .env.ci .env
+        working-directory: .
+
       - name: Trocar valor DB_HOST
-        run: sed -i "s/DB_HOST={DB_HOST}/DB_HOST=${{ secrets.DB_HOST }}/g" .env
+        run: sed -i "s#DB_HOST={DB_HOST}#DB_HOST=${{ secrets.DB_HOST }}#g" .env
         working-directory: .
 
       - name: Trocar valor DB_DATABASE_PRD
-        run: sed -i "s/DB_DATABASE={DB_DATABASE}/DB_DATABASE=${{ secrets.DB_DATABASE_PRD }}/g" .env
+        run: sed -i "s#DB_DATABASE={DB_DATABASE}/DB_DATABASE=${{ secrets.DB_DATABASE_PRD }}#g" .env
         working-directory: .
 
       - name: Trocar valor DB_USERNAME
-        run: sed -i "s/DB_USERNAME={DB_USERNAME}/DB_USERNAME=${{ secrets.DB_USERNAME }}/g" .env
+        run: sed -i "s#DB_USERNAME={DB_USERNAME}/DB_USERNAME=${{ secrets.DB_USERNAME }}#g" .env
         working-directory: .
 
       - name: Trocar valor DB_PASSWORD
-        run: sed -i "s/DB_PASSWORD={DB_PASSWORD}/DB_PASSWORD=${{ secrets.DB_PASSWORD }}/g" .env
+        run: sed -i "s#DB_PASSWORD={DB_PASSWORD}/DB_PASSWORD=${{ secrets.DB_PASSWORD }}#g" .env
         working-directory: .
 
       - name: Trocar valor DEFAULT_PASSWORD primeiro acesso
-        run: sed -i "s/DB_PASSWORD={DB_PASSWORD}/DB_PASSWORD=${{ secrets.DEFAULT_PASSWORD }}/g" .env
+        run: sed -i "s#DB_PASSWORD={DB_PASSWORD}/DB_PASSWORD=${{ secrets.DEFAULT_PASSWORD }}#g" .env
         working-directory: .
 
       - name: Trocar valor APP_DEBUG
-        run: sed -i "s/APP_DEBUG={APP_DEBUG}/APP_DEBUG=false/g" .env
+        run: sed -i "s#APP_DEBUG={APP_DEBUG}/APP_DEBUG=false#g" .env
         working-directory: .
 
       - name: Trocar valor APP_NAME
-        run: sed -i "s/APP_NAME={APP_NAME}/APP_NAME=\"Chat...\"/g" .env
+        run: sed -i "s#APP_NAME={APP_NAME}/APP_NAME=\"Chat...\"#g" .env
         working-directory: .
 
 
