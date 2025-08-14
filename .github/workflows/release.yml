@@ -30,6 +30,13 @@ jobs:
 #        run: npm install
 #        working-directory: ./sisponto
 
+      - name: Verificar conteúdo da raiz
+        run: ls -la
+
+      - name: Verificar conteúdo da pasta sisponto
+        run: ls -la ./sisponto
+
+
       - name: Instalar dependências do Composer
         run: composer install
         working-directory: ./sisponto
