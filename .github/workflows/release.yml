@@ -30,6 +30,11 @@ jobs:
 #        run: npm install
 #        working-directory: .
 
+      - name: Atualizar dependências do Composer (TEMPORÁRIO)
+        run: composer update
+        working-directory: .
+
+
       - name: Instalar dependências do Composer
         run: composer install
         working-directory: .
