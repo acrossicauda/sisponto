@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout código
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
       - name: Configurar ambiente PHP
         uses: shivammathur/setup-php@v2
@@ -30,10 +30,8 @@ jobs:
 #        run: npm install
 #        working-directory: .
 
-
-      - name: Verificar conteúdo da pasta sisponto
-        run: ls -la ./
-
+#      - name: Verificar conteúdo da pasta sisponto
+#        run: ls -la ./
 
       - name: Copiar e ajustar o arquivo .env
         run: cp .env.ci .env
