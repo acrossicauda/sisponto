@@ -30,12 +30,25 @@ jobs:
 #        run: npm install
 #        working-directory: .
 
-#      - name: Verificar conteúdo da pasta sisponto
-#        run: ls -la ./
+      - name: Verificar conteúdo da pasta sisponto
+        run: ls -la ./
 
-      - name: Copiar e ajustar o arquivo .env
-        run: cp .env.ci .env
+      - name: Criar arquivo .env dinamicamente
+        run: |
+          cat <<EOF > .env
+          APP_NAME="Chat..."
+          APP_DEBUG=false
+          DB_HOST=${{ secrets.DB_HOST }}
+          DB_DATABASE=${{ secrets.DB_DATABASE_PRD }}
+          DB_USERNAME=${{ secrets.DB_USERNAME }}
+          DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+          DEFAULT_PASSWORD=${{ secrets.DEFAULT_PASSWORD }}
+          EOF
         working-directory: .
+
+#      - name: Copiar e ajustar o arquivo .env
+#        run: cp .env.ci .env
+#        working-directory: .
 
       - name: Trocar valor DB_HOST
         run: sed -i "s/DB_HOST={DB_HOST}/DB_HOST=${{ secrets.DB_HOST }}/g" .env
