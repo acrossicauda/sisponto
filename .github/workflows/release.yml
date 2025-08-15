@@ -30,27 +30,13 @@ jobs:
 #        run: npm install
 #        working-directory: .
 
-
-#      - name: Criar arquivo .env dinamicamente
-#        run: |
-#          cat <<EOF > .env
-#          APP_NAME="Chat..."
-#          APP_DEBUG=false
-#          DB_HOST=${{ secrets.DB_HOST }}
-#          DB_DATABASE=${{ secrets.DB_DATABASE_PRD }}
-#          DB_USERNAME=${{ secrets.DB_USERNAME }}
-#          DB_PASSWORD=${{ secrets.DB_PASSWORD }}
-#          DEFAULT_PASSWORD=${{ secrets.DEFAULT_PASSWORD }}
-#          EOF
-#        working-directory: .
-
       - name: Copiar e ajustar o arquivo .env
         run: cp .env.cli .env
         working-directory: .
 
 
-      - name: Verificar conteúdo da pasta sisponto
-        run: ls -la ./
+#      - name: Verificar conteúdo da pasta sisponto
+#        run: ls -la ./
 
 
       - name: Trocar valor DB_HOST
@@ -96,6 +82,8 @@ jobs:
         run: php artisan key:generate
         working-directory: .
 
+      - name: Verificar .env após substituição
+        run: grep DB_HOST .env
 
       - name: Rodando migrations
         env:
