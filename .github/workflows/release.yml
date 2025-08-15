@@ -82,8 +82,10 @@ jobs:
         run: php artisan key:generate
         working-directory: .
 
-      - name: Verificar .env após substituição
-        run: grep DB_HOST .env
+
+      - name: Verificar .env
+        run: cat .env | grep DB_
+
 
       - name: Rodando migrations
         env:
