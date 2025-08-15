@@ -39,12 +39,13 @@ jobs:
 #        run: ls -la ./
 
 
+
       - name: Trocar valor DB_HOST
         run: sed -i "s|DB_HOST={DB_HOST}|DB_HOST=${{ secrets.DB_HOST }}|g" .env
         working-directory: .
 
       - name: Trocar valor DB_DATABASE_PRD
-        run: sed -i "s|DB_DATABASE={DB_DATABASE}|DB_DATABASE=${{ secrets.DB_DATABASE_PRD }}|g" .env
+        run: sed -i "s|DB_DATABASE={DB_DATABASE}|DB_DATABASE=${{ secrets.DB_DATABASE }}|g" .env
         working-directory: .
 
       - name: Trocar valor DB_USERNAME
