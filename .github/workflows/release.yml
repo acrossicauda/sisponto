@@ -46,32 +46,32 @@ jobs:
 #          EOF
 #        working-directory: .
 
-      - name: Copiar e ajustar o arquivo .env
-        run: cp .env.cli .env
-        working-directory: .
+#      - name: Copiar e ajustar o arquivo .env
+#        run: cp .env.cli .env
+#        working-directory: .
 
       - name: Trocar valor DB_HOST
-        run: sed -i "s/DB_HOST={DB_HOST}/DB_HOST=${{ secrets.DB_HOST }}/g" .env
+        run: sed -i "s|DB_HOST={DB_HOST}|DB_HOST=${{ secrets.DB_HOST }}|g" .env
         working-directory: .
 
       - name: Trocar valor DB_DATABASE_PRD
-        run: sed -i "s/DB_DATABASE={DB_DATABASE}/DB_DATABASE=${{ secrets.DB_DATABASE_PRD }}/g" .env
+        run: sed -i "s|DB_DATABASE={DB_DATABASE}|DB_DATABASE=${{ secrets.DB_DATABASE_PRD }}|g" .env
         working-directory: .
 
       - name: Trocar valor DB_USERNAME
-        run: sed -i "s/DB_USERNAME={DB_USERNAME}/DB_USERNAME=${{ secrets.DB_USERNAME }}/g" .env
+        run: sed -i "s|DB_USERNAME={DB_USERNAME}|DB_USERNAME=${{ secrets.DB_USERNAME }}|g" .env
         working-directory: .
 
       - name: Trocar valor DB_PASSWORD
-        run: sed -i "s/DB_PASSWORD={DB_PASSWORD}/DB_PASSWORD=${{ secrets.DB_PASSWORD }}/g" .env
+        run: sed -i "s|DB_PASSWORD={DB_PASSWORD}|DB_PASSWORD=${{ secrets.DB_PASSWORD }}|g" .env
         working-directory: .
 
       - name: Trocar valor DEFAULT_PASSWORD primeiro acesso
-        run: sed -i "s/DB_PASSWORD={DB_PASSWORD}/DB_PASSWORD=${{ secrets.DEFAULT_PASSWORD }}/g" .env
+        run: sed -i "s|DB_PASSWORD={DB_PASSWORD}|DB_PASSWORD=${{ secrets.DEFAULT_PASSWORD }}|g" .env
         working-directory: .
 
       - name: Trocar valor APP_DEBUG
-        run: sed -i "s/APP_DEBUG={APP_DEBUG}/APP_DEBUG=false/g" .env
+        run: sed -i "s|APP_DEBUG={APP_DEBUG}|APP_DEBUG=false|g" .env
         working-directory: .
 
       - name: Trocar valor APP_NAME
