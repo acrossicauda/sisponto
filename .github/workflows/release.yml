@@ -12,14 +12,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout código
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Configurar ambiente PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: 8.1
           #        php-version: ${{ matrix.php-versions }}
-          extensions: mbstring, intl
+          extensions: mbstring, intl, xdebug-beta
           ini-values: post_max_size=256M, max_execution_time=180
           coverage: xdebug
           tools: php-cs-fixer, phpunit:${{ matrix.phpunit-versions }}
@@ -48,7 +48,7 @@ jobs:
 
       - name: Copiar e ajustar o arquivo .env
         run: cp .env.ci .env
-        working-directory: ./
+        working-directory: .
 
       - name: Trocar valor DB_HOST
         run: sed -i "s#DB_HOST={DB_HOST}#DB_HOST=${{ secrets.DB_HOST }}#g" .env
