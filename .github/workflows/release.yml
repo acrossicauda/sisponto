@@ -39,6 +39,7 @@ jobs:
 #        run: ls -la ./
 
 
+
       - name: Trocar valor DB_HOST
         run: sed -i "s|DB_HOST={DB_HOST}|DB_HOST=${{ secrets.DB_HOST }}|g" .env
         working-directory: .
