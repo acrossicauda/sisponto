@@ -47,7 +47,7 @@ jobs:
 #        working-directory: .
 
       - name: Copiar e ajustar o arquivo .env
-        run: cp .env.ci .env
+        run: cp .env.cli .env
         working-directory: .
 
       - name: Trocar valor DB_HOST
