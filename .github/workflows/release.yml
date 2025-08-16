@@ -118,38 +118,39 @@ jobs:
       #      working-directory: .
 
       # CONFIGURACAO EMAIL
-      #    - name: Trocar valor MAIL_MAILER
-      #      run: sed -i "s/MAIL_MAILER={MAIL_MAILER}/MAIL_MAILER=${{ secrets.MAIL_MAILER_PRD }}/g" .env
-      #      working-directory: .
+      - name: Trocar valor MAIL_MAILER
+        run: sed -i "s/MAIL_MAILER={MAIL_MAILER}/MAIL_MAILER=${{ secrets.MAIL_MAILER_PRD }}/g" .env
+        working-directory: .
 
-      #    - name: Trocar valor MAIL_HOST
-      #      run: sed -i "s/MAIL_HOST={MAIL_HOST}/MAIL_HOST=${{ secrets.MAIL_HOST_PRD }}/g" .env
-      #      working-directory: .
+      - name: Trocar valor MAIL_HOST
+        run: sed -i "s/MAIL_HOST={MAIL_HOST}/MAIL_HOST=${{ secrets.MAIL_HOST_PRD }}/g" .env
+        working-directory: .
 
-      #    - name: Trocar valor MAIL_PORT
-      #      run: sed -i "s/MAIL_PORT={MAIL_PORT}/MAIL_PORT=${{ secrets.MAIL_PORT_PRD }}/g" .env
-      #      working-directory: .
+      - name: Trocar valor MAIL_PORT
+        run: sed -i "s/MAIL_PORT={MAIL_PORT}/MAIL_PORT=${{ secrets.MAIL_PORT_PRD }}/g" .env
+        working-directory: .
 
-      #    - name: Trocar valor MAIL_USERNAME
-      #      run: sed -i "s/MAIL_USERNAME={MAIL_USERNAME}/MAIL_USERNAME=${{ secrets.MAIL_USERNAME_PRD }}/g" .env
-      #      working-directory: .
+      - name: Trocar valor MAIL_USERNAME
+        run: sed -i "s/MAIL_USERNAME={MAIL_USERNAME}/MAIL_USERNAME=${{ secrets.MAIL_USERNAME_PRD }}/g" .env
+        working-directory: .
 
-      #    - name: Trocar valor MAIL_PASSWORD
-      #      run: sed -i "s/MAIL_PASSWORD={MAIL_PASSWORD}/MAIL_PASSWORD=${{ secrets.MAIL_PASSWORD_PRD }}/g" .env
-      #      working-directory: .
+      - name: Trocar valor MAIL_PASSWORD
+        run: sed -i "s/MAIL_PASSWORD={MAIL_PASSWORD}/MAIL_PASSWORD=${{ secrets.MAIL_PASSWORD_PRD }}/g" .env
+        working-directory: .
 
-      #    - name: Trocar valor MAIL_ENCRYPTION
-      #      run: sed -i "s/MAIL_ENCRYPTION={MAIL_ENCRYPTION}/MAIL_ENCRYPTION=${{ secrets.MAIL_ENCRYPTION_PRD }}/g" .env
-      #      working-directory: .
+      - name: Trocar valor MAIL_ENCRYPTION
+        run: sed -i "s/MAIL_ENCRYPTION={MAIL_ENCRYPTION}/MAIL_ENCRYPTION=${{ secrets.MAIL_ENCRYPTION_PRD }}/g" .env
+        working-directory: .
 
 
-#      - name: Trocar valor API_IA_URL
-#        run: sed -i "s|{API_IA_URL}|\"${{ secrets.API_IA_URL }}\"|g" .env
-#        working-directory: .
+    #      - name: Trocar valor API_IA_URL
+    #        run: sed -i "s|{API_IA_URL}|\"${{ secrets.API_IA_URL }}\"|g" .env
+    #        working-directory: .
 
       #    - name: Trocar valor MAIL_ENCRYPTION
       #      run: sed -i "s/API_IA_TOKEN={API_IA_TOKEN}/API_IA_TOKEN=${{ secrets.API_IA_TOKEN }}/g" .env
       #      working-directory: .
+
 
       - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
