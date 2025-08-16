@@ -26,10 +26,6 @@ jobs:
         env:
           debug: true # specify true or false
 
-#      - name: Instalar dependências do Node.js
-#        run: npm install
-#        working-directory: .
-
       - name: Copiar e ajustar o arquivo .env
         run: cp .env.cli .env
         working-directory: .
@@ -107,6 +103,11 @@ jobs:
       #    - name: NPM RUN
       #      run: npm run prod
       #      working-directory: .
+
+
+      - name: Instalar dependências do Node.js
+        run: npm install
+        working-directory: .
 
       - name: Building application
         run: npm run build
